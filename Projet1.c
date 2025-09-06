@@ -58,22 +58,22 @@ for (int i = 0; i < Taille; i++)
 
 void ModifierNote(){
    int indice;
-   float NewValleur;
+   float NewValeur;
    AfficherNotes();
    printf("veuillez choisier l'indice qui modifier (1 - %d) : ",Taille);
    scanf("%d",&indice);
-   if (indice <= Taille && indice >= 0)
+   if (indice <= Taille && indice >= 1)
    {
-       printf("veuillez entrer la nouvelle valaur : ");
-       scanf("%f",&NewValleur);
+       printf("veuillez entrer la nouvelle valeur : ");
+       scanf("%f",&NewValeur);
    }else{
       printf("s'il vous plait ! veuillez choisier l'indice qui modifier (1 - %d) : ",Taille);
       scanf("%d",&indice);
-       printf("veuillez entrer la nouvelle valaur : ");
-       scanf("%f",&NewValleur);
+       printf("veuillez entrer la nouvelle valeur : ");
+       scanf("%f",&NewValeur);
    }
    
-   notes[indice-1] = NewValleur;   
+   notes[indice-1] = NewValeur;   
 
    printf("\nLes Notes Apres Modification sont : \n");
 
@@ -81,17 +81,6 @@ void ModifierNote(){
             {
                printf("note %d : %.2f\n",i+1,notes[i]);
             }
-}
-
-int Statistique() {
-   printf("~~~~~~Statistique~~~~~~\n");
-   printf("1- Moyenne\n");
-   printf("2- Min\n");
-   printf("3- Max\n");
-   printf("4- Admis / No Admis\n");
-   printf("Quel est votre choix ? ");
-   scanf("%d", &CH2);
-   return CH2;
 }
 
 float Moyenne(float S){
@@ -125,15 +114,15 @@ float Min (float min){
    return min;
 }
 
-float Admis (float admis){
+void Admis (float admis){
    float a;
 admis = Moyenne(a);
-   if(admis > 10){
+   if(admis >= 10){
       printf("felicitations, vous avez ete admis\n");  
    }else{
       printf("Desole, vous avez ete Non admis\n");
    }
-   return admis;
+   
 }
 
 void AjouteNote (float N, int pos)
@@ -141,11 +130,11 @@ void AjouteNote (float N, int pos)
    int i;
    printf("veuillez saiser la valeur a inserer :");
    scanf("%f",&N);
-   printf("veuillez saiser sa pstion : ");
+   printf("veuillez saiser sa position : ");
    scanf("%d",&pos);
       do{
          if(pos > Taille+1 || pos < 1){
-      printf("veuillez saiser sa pstion entre 1 et %d: ",Taille+1);
+      printf("veuillez saiser sa position entre 1 et %d: ",Taille+1);
       scanf("%d",&pos);
          }
       }
@@ -161,8 +150,6 @@ void AjouteNote (float N, int pos)
          for(i=0; i < Taille; i++){
             printf(" note %d: %.2f\n",i+1, notes[i]);
          }
-      
-   
 }
 
 void SuppNote(int pos){
@@ -171,7 +158,7 @@ void SuppNote(int pos){
    scanf("%d",&pos);
       do{
          if(pos > Taille || pos < 1){
-      printf("veuillez saiser sa pstion entre 1 et %d: ",Taille);
+      printf("veuillez saiser sa position entre 1 et %d: ",Taille);
       scanf("%d",&pos);
          }
       }
@@ -192,47 +179,30 @@ void SuppNote(int pos){
 void BackMenu(){
    printf("veuillez entrer 1 pour retour Menu :");
    scanf("%d",&choix);
-   if(choix != 1){
-      printf("1- retour Menu :");
-      scanf("%d",&choix);
-      MyMenu();
-   }else
-   MyMenu();
-
-}
-
-void BackStati(){
-    printf("veuillez entrer 1 pour retour Menu statistique:\n");
-    printf("veuillez entrer 2 pour retour Menu :");
-    scanf("%d",&choix);
    if(choix == 1){
-      StatiMenu();
-   } else if(choix == 2){
-   MyMenu();
-   }
-   else
-   printf("veuillez sasier 1 pour Menu statistique , ou 2 Menu : " );
+      
+      MyMenu();
+   }else{
+
+   printf("1- retour Menu :");
    scanf("%d",&choix);
-}
+   MyMenu();
 
-int StatiMenu (){
-    float a,b,c;
-   switch (CH2)
-
-   {
-   case 1:
-      Moyenne(a);
-      BackStati();
-      BackMenu();
-
-      break;
-   
-   default:
-      break;
    }
 }
 
-int Choisier (){
+void Statistique() {
+   float s, m, ma, a;
+   printf("la Moyenne est : %.2f\n",Moyenne(s));
+   printf("le minimum valeur est : %.2f\n",Min(m));
+   printf("le Maximum valeur est : %.2f\n",Max(ma));
+   Admis(a);
+
+}
+
+void Choisier (){
+   int pos;
+   float N;
    do
    {
        switch (choix)
@@ -249,38 +219,38 @@ int Choisier (){
       break;
 
    case 3:
-      ModifierNote();
+      Statistique();      
       BackMenu();
+      
       break;
    case 4:
-      Statistique();
-
+      AjouteNote(N,pos);
       BackMenu();
       break;
-   
+   case 5:
+      ModifierNote();
+      BackMenu();
+   break;
+
+   case 6:
+      SuppNote(pos);
+      BackMenu();
+   break;
+      
    default:
+   printf("s'il vous plait ! veuillez choisier entrer 0 et 6 :");
+   scanf("%d",&choix);
       break;
    }
    } while (choix != 0);
    printf("fin de programme ! Merci ~~~~~~");
-   
 }
 
+
 int main(){
-  int pos, pos2;
-  float s, max, min,A,N;
-   printf("\n",MyMenu(choix));
-   printf("\n",Choisier(choix));
-  /*SaiserNotes();
-  AfficherNotes(SaiserNotes);
-  ModifierNote();
-   printf("%.2f\n",Moyenne(s));
-   printf("%.2f\n",Max(max));
-   printf("%.2f\n",Min(min));
-   printf("\n",Admis(A));
-  AjouteNote(N,pos);
-  SuppNote(pos2);
-*/
+
+   choix = MyMenu();
+   Choisier();
 
  return 0;
 }
