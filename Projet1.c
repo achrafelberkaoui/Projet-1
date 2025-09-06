@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <stdbool.h>
-int choix,CH2;
+
+int choix;
 int  Taille;
 float  notes [100];
 
@@ -30,14 +30,25 @@ int MyMenu (){
 
 void SaiserNotes()
 {
-   printf("veuillez saiser la taille du tableau : ");
+   printf("veuillez saisir la taille du tableau : ");
    scanf("%d",&Taille);
 
-   printf("veuillez saiser les elements du tableau : \n");
+   printf("veuillez saisir les elements du tableau : \n");
       for(int i=0; i<Taille; i++)
       {
-         printf("notes entre 0 et 20 [%d] = ",i+1);
+         printf("note entre 0 et 20 [%d] = ",i+1);
          scanf("%f",&notes[i]);
+         do{
+            if (notes[i]<0 || notes[i]>20)
+            {
+               printf("desole ! note entre 0 et 20 [%d] = ",i+1);
+               scanf("%f",&notes[i]);
+            }
+            
+            
+         }while (notes[i]<0 || notes[i]>20);
+      
+         
       }
       
       
@@ -66,6 +77,8 @@ void ModifierNote(){
    {
        printf("veuillez entrer la nouvelle valeur : ");
        scanf("%f",&NewValeur);
+       
+       
    }else{
       printf("s'il vous plait ! veuillez choisier l'indice qui modifier (1 - %d) : ",Taille);
       scanf("%d",&indice);
@@ -128,13 +141,13 @@ admis = Moyenne(a);
 void AjouteNote (float N, int pos)
 {
    int i;
-   printf("veuillez saiser la valeur a inserer :");
+   printf("veuillez saisir la valeur a inserer :");
    scanf("%f",&N);
-   printf("veuillez saiser sa position : ");
+   printf("veuillez saisir sa position : ");
    scanf("%d",&pos);
       do{
          if(pos > Taille+1 || pos < 1){
-      printf("veuillez saiser sa position entre 1 et %d: ",Taille+1);
+      printf("veuillez saisir sa position entre 1 et %d: ",Taille+1);
       scanf("%d",&pos);
          }
       }
@@ -154,7 +167,7 @@ void AjouteNote (float N, int pos)
 
 void SuppNote(int pos){
     int i;
-   printf("veuillez saiser la position de l'element a supprimer : ");
+   printf("veuillez saisir la position de l'element a supprimer : ");
    scanf("%d",&pos);
       do{
          if(pos > Taille || pos < 1){
