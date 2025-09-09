@@ -59,7 +59,7 @@ void SaisirNotes (){
                printf("desole ! note entre 0 et 20 ");
                scanf("%f",&note);
             }else{
-         
+        }
     
     printf("Voulez-vous saisir un autre étudiant ?");
     scanf("%c",&reponse);
