@@ -62,7 +62,7 @@ void SaisirNotes (){
         }
     
     printf("Voulez-vous saisir un autre étudiant ?");
-    scanf("%c",&reponse);
+    scanf("%c",&rponse);
 }while (reponse != 'O');
 
 }
